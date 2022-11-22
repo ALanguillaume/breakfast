@@ -1,0 +1,92 @@
+---
+title: "flat_business_logic.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+library(dplyr)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# Filtering my breakfast dataset
+
+Rumbling about how important it is to properly document your package.
+
+```{r function-filter_breakfast_data}
+#' Filter the breakfast dataset
+#' 
+#' Filter the breakfast dataset by days in region.
+#' 
+#' @param breakfast_df A data.frame. The breakfast dataset with at least 
+#' the columns `day_of_the_week` and `region`.
+#' @param days_chr A character vector. The days of week.
+#' @param region_chr A character vector. The regions to select.
+#'
+#' @return A data.frame.
+#' 
+#' @importFrom dplyr filter
+#' @export
+#'
+#' @examples
+filter_breakfast_data <- function(breakfast_df, days_chr, region_chr) {
+  breakfast_df |> 
+    filter(
+      day_of_the_week %in% days_chr,
+      region %in% region_chr
+    )
+}
+```
+
+```{r example-filter_breakfast_data}
+filter_breakfast_data(
+  breakfast_df = breakfast,
+  days_chr = c("Monday", "Tuesday"),
+  region_chr = "Center"
+)
+```
+
+```{r tests-filter_breakfast_data}
+test_that("filter_breakfast_data works", {
+  output <- filter_breakfast_data(
+    breakfast_df = head(breakfast),
+    days_chr = c("Friday", "Wednesday"),
+    region_chr = "Center"
+  )
+  expect_equal(
+    object = output,
+    # The trick is to use dput() here
+    expected = structure(
+      list(
+        day_end = "Weekday",
+        start_time = structure(27000, 
+                               class = c("hms", "difftime"), units = "secs"),
+        day_of_the_week = "Friday",
+        domicile = "At home",
+        region = "Center"
+      ),
+      row.names = c(NA, -1L),
+      class = "data.frame"
+    )
+  )
+})
+```
+
+
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(
+  flat_file = "dev/flat_business_logic.Rmd", 
+  vignette_name = "Breakfast Business Logic",
+  overwrite = TRUE
+)
+```
+

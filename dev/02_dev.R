@@ -16,7 +16,13 @@
 ## Dependencies ----
 ## Amend DESCRIPTION with dependencies read from package code parsing
 ## install.package('attachment') # if needed.
+# devtools::document()
 attachment::att_amend_desc()
+
+checkhelper::print_globals()
+
+# Add fusen flat file
+fusen::add_additional(flat_name = "business_logic")
 
 ## Add modules ----
 ## Create a module infrastructure in R/
@@ -37,7 +43,7 @@ golem::add_sass_file("custom")
 
 ## Add internal datasets ----
 ## If you have data in your package
-usethis::use_data_raw(name = "my_dataset", open = FALSE)
+usethis::use_data_raw(name = "breakfast", open = FALSE)
 
 ## Tests ----
 ## Add one line by test you want to create
