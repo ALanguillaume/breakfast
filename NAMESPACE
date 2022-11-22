@@ -3,6 +3,8 @@
 export(filter_breakfast_data)
 export(run_app)
 import(shiny)
+importFrom(DT,DTOutput)
+importFrom(DT,renderDT)
 importFrom(dplyr,filter)
 importFrom(golem,activate_js)
 importFrom(golem,add_resource_path)
