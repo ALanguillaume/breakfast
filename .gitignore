@@ -1,3 +1,5 @@
 .Rproj.user
+.Rhistory
+.Rdata
 data-raw/big_stuff.gpkg
 inst/doc
