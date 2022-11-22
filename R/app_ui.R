@@ -3,7 +3,6 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #' @import shiny
-#' @importFrom DT DTOutput
 #' @noRd
 app_ui <- function(request) {
   tagList(
@@ -13,41 +12,10 @@ app_ui <- function(request) {
     fluidPage(
       sidebarLayout(
         sidebarPanel = sidebarPanel(
-          h2("Breakfast APP"),
-          checkboxGroupInput(
-            inputId = "days",
-            label = "Days",
-            choices = c(
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday",
-              NULL
-            )
-          ),
-          selectInput(
-            inputId = "region",
-            label =  "Region",
-            choices = c(
-              "West",
-              "Ile-de-France",
-              "Center",
-              "Northwest",
-              "Southwest",
-              "East",
-              "Southeast",
-              "Central East"
-            )
-          )
+          mod_side_bar_ui("side_bar_1")
         ),
         mainPanel = mainPanel(
-          h1("Dataset"),
-          DTOutput(
-            outputId = "table"
-          )
+          mod_main_panel_ui("main_panel_1")
         )
       )
     )
